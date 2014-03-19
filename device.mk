@@ -31,6 +31,13 @@ PRODUCT_AAPT_PREF_CONFIG := xhdpi
 TARGET_SCREEN_HEIGHT := 1280
 TARGET_SCREEN_WIDTH := 720
 PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=320
+#Tablet
+else ifeq ($(TARGET_PRODUCT),cm_espresso10att)
+PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
+PRODUCT_AAPT_PREF_CONFIG := xhdpi
+TARGET_SCREEN_HEIGHT := 800
+TARGET_SCREEN_WIDTH := 1280
+PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=320
 else
 # These poor devices have smaller screens
 PRODUCT_AAPT_CONFIG := normal hdpi
@@ -184,8 +191,9 @@ $(call inherit-product, device/samsung/msm8960-common/msm8960.mk)
 
 ifeq ($(filter cm_apexqtmo cm_expressatt,$(TARGET_PRODUCT)),)
     $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
+else ifeq ($(TARGET_PRODUCT),cm_espresso10att)
+    $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 else
     $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 endif
-
 
